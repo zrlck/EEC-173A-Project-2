@@ -9,7 +9,7 @@ def main():
     # run our custom DNS + HTTP client
     http_response, http_rtt, resolved_ip = custom_dns_get_http(server_domain, server_path)
 
-    if http_response is None:
+    if http_response is None: # making sure we got a response
         print("TMZ could not be fetched (DNS or HTTP failed).")
         return
 
@@ -19,11 +19,11 @@ def main():
     # print only part of the HTML so the terminal doesn't overflow, this is just for demo purposes
     try:
         decoded = http_response.decode(errors="ignore")
-        print("\n--- HTML Response (first 500 chars) ---\n")
+        print("\nHTML Response (first 500 chars)\n")
         print(decoded[:500])
         print("\nEnd")
-    except: # using it for exeptions in handling decoding errors
-        print("Couln't resolve fetch.")
+    except: # i am using it for exeptions in handling decoding errors
+        print("Couldn't resolve fetch.")
 
 if __name__ == "__main__":
     main()
