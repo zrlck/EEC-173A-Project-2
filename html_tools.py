@@ -10,7 +10,7 @@ def build_and_get_http(server_host, server_path = "/"):
     return request_server_lines.encode() # return as bytes
 
 def custom_dns_get_http(server_domain, server_path = "/"):
-    ip_address = iteration_dns_resolver(server_domain) # use our DNS resolver to get the IP address
+    ip_address, dns_rtt = iteration_dns_resolver(server_domain) # use our DNS resolver to get the IP address
     if ip_address is None:
         print ("Not able to resolve domain.") # rising error message if domain cannot be resolved
         return None, None, None
@@ -47,7 +47,7 @@ def custom_dns_get_http(server_domain, server_path = "/"):
         full_http_response = b''.join(http_response_onchunks)
         http_response_time = time_end - time_start # total time taken for HTTP request and response
 
-        return full_http_response, http_response_time, ip_address # return the full HTTP response, time taken, and IP address
+        return full_http_response, http_response_time, ip_address, dns_rtt # return the full HTTP response, time taken, and IP address (added also dns_rtt for the final prnting)
     
     except Exception as e: # i am rising a general exception to catch any errors during socket operations 
         print(f"Error during HTTP communication: {e}")
