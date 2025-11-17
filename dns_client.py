@@ -101,4 +101,4 @@ def iteration_dns_resolver(nameof_domain):
             cname = answer['data']
             return iteration_dns_resolver(cname) 
 
-    return ip_final # finished dns_clent, now need to work on html_tools so that we can fetch webpages using this resolver
+    return ip_final, root_time # finished dns_clent, now need to work on html_tools so that we can fetch webpages using this resolver
