@@ -14,7 +14,7 @@ def custom_dns_get_http(server_domain, server_path = "/"):
     if ip_address is None:
         print ("Not able to resolve domain.") # rising error message if domain cannot be resolved
         return None, None, None
-    print(f"[INFO] DNS resolved {server_domain} to {ip_address}") # this is just for info purpose
+    print(f"DNS resolved {server_domain} to {ip_address}") # this is just for info purpose
 
     # now the important part is to create a TCP socket and connect to the server
     http_tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -49,7 +49,7 @@ def custom_dns_get_http(server_domain, server_path = "/"):
 
         return full_http_response, http_response_time, ip_address # return the full HTTP response, time taken, and IP address
     
-    except Exception as e:
+    except Exception as e: # i am rising a general exception to catch any errors during socket operations 
         print(f"Error during HTTP communication: {e}")
         http_tcp_socket.close()
         return None, None, ip_address
